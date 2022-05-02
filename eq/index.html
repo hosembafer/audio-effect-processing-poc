@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Compressor</title>
+  </head>
+  <body>
+    <audio controls src="../assets/drum-beat.mp3" id="source"></audio>
+    <div></div>
+    <input type="checkbox" id="enabled"> <label for="enabled">On / Off</label>
+    <div class="options-form" data-order="0">
+      <div>
+        <label>Type</label>
+        <select name="type">
+          <option value="lowpass">lowpass</option>
+          <option value="highpass">highpass</option>
+          <option value="bandpass">bandpass</option>
+          <option value="lowshelf">lowshelf</option>
+          <option value="highshelf">highshelf</option>
+          <option value="peaking">peaking</option>
+          <option value="notch">notch</option>
+          <option value="allpass">allpass</option>
+        </select>
+        <span id="type-value"></span>
+      </div>
+      <div>
+        <label>Frequency</label>
+        <input type="range" value="350" name="frequency" min="0" max="24000" />
+        <span id="frequency-value"></span>
+      </div>
+      <div>
+        <label>Q</label>
+        <input type="range" value="1" name="Q" min="0.0001" max="1000" />
+        <span id="Q-value"></span>
+      </div>
+      <div>
+        <label>Gain</label>
+        <input type="range" value="0" name="gain" min="-40" max="40" />
+        <span id="gain-value"></span>
+      </div>
+    </div>
+    
+    <div class="options-form" data-order="1">
+      <div>
+        <label>Type</label>
+        <select name="type">
+          <option value="lowpass">lowpass</option>
+          <option value="highpass">highpass</option>
+          <option value="bandpass">bandpass</option>
+          <option value="lowshelf">lowshelf</option>
+          <option value="highshelf">highshelf</option>
+          <option value="peaking">peaking</option>
+          <option value="notch">notch</option>
+          <option value="allpass">allpass</option>
+        </select>
+        <span id="type-value"></span>
+      </div>
+      <div>
+        <label>Frequency</label>
+        <input type="range" value="350" name="frequency" min="0" max="24000" />
+        <span id="frequency-value"></span>
+      </div>
+      <div>
+        <label>Q</label>
+        <input type="range" value="1" name="Q" min="0.0001" max="1000" />
+        <span id="Q-value"></span>
+      </div>
+      <div>
+        <label>Gain</label>
+        <input type="range" value="0" name="gain" min="-40" max="40" />
+        <span id="gain-value"></span>
+      </div>
+    </div>
+
+  </body>
+  <script src="./eq.js"></script>
+</html>

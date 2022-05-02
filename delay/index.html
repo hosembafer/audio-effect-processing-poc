@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Compressor</title>
+  </head>
+  <body>
+    <!-- <audio controls src="../assets/drum-beat.mp3" id="source"></audio> -->
+    <audio controls src="../assets/drum-beat.mp3" id="source"></audio>
+    <div></div>
+    <input type="checkbox" id="enabled"> <label for="enabled">On / Off</label>
+    <div class="options-form">
+      <div>
+        <label>Delay Time</label>
+        <input type="range" value="1" name="delayTime" min="0" max="180" />
+        <span id="delayTime-value"></span>
+      </div>
+    </div>
+  </body>
+  <script src="./delay.js"></script>
+</html>
