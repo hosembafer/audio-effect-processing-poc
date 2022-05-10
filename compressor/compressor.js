@@ -18,18 +18,22 @@ document.getElementById("enabled").addEventListener("change", (event) => {
 
 // ****
 
+
 const compressor = audioCtx.createDynamicsCompressor();
+const makeupGain = new GainNode(audioCtx);
 
 const connect = () => {
   source.connect(compressor);
-  compressor.connect(audioCtx.destination);
+  compressor.connect(makeupGain);
+  makeupGain.connect(audioCtx.destination);
 
   document.getElementById("enabled").checked = true;
 };
 
 const disconnect = () => {
-  source.disconnect(compressor);
-  compressor.disconnect(audioCtx.destination);
+  source.disconnect();
+  compressor.disconnect();
+  makeupGain.disconnect();
 
   source.connect(audioCtx.destination);
 
@@ -40,10 +44,42 @@ const disconnect = () => {
 connect();
 // ****
 
+const dBToAmp = (dB) => Math.max(0, Math.pow(10, dB / 20));
+
 const changeOption = (optionName, value) => {
   compressor[optionName].value = value;
   document.getElementById(`${optionName}-value`).innerHTML = value;
 };
+
+function add(accumulator, a) {
+  return accumulator + a;
+}
+
+let listOfN = [];
+
+const cancelAutoMakeupGain = () => {
+  const reduction = compressor.reduction;
+  // const reductionLinear = dBToAmp(reduction);
+  // makeupGain.gain.value = reductionLinear;
+  console.log({ reduction });
+
+  listOfN.push(reduction);
+
+  if (listOfN.length === 10) {
+    const avg = listOfN.reduce(add, 0) / listOfN.length;
+    console.log("SUM: " + avg);
+    makeupGain.gain.value = dBToAmp(avg);
+    listOfN = [];
+  }
+
+  // console.log(reduction);
+
+  requestAnimationFrame(() => {
+    cancelAutoMakeupGain();
+  });
+};
+
+cancelAutoMakeupGain();
 
 [...document.querySelectorAll(".options-form input")].forEach((input) => {
   input.addEventListener("input", (event) => {

@@ -2,15 +2,17 @@
 <html>
   <head>
     <title>Compressor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tunajs/1.0.15/tuna-min.js"></script>
   </head>
   <body>
-    <audio controls src="../assets/drum-beat.mp3" id="source"></audio>
+    <!-- <audio controls src="../assets/drum-beat.mp3" id="source" loop></audio> -->
+    <audio controls src="../assets/bass.wav" id="source" loop></audio>
     <div></div>
     <input type="checkbox" id="enabled"> <label for="enabled">On / Off</label>
     <div class="options-form">
       <div>
         <label>Threshold</label>
-        <input type="range" value="-20" name="threshold" min="-100" max="0" />
+        <input type="range" value="-60" name="threshold" min="-100" max="0" />
         <span id="threshold-value"></span>
       </div>
       <div>
@@ -20,7 +22,7 @@
       </div>
       <div>
         <label>Ratio</label>
-        <input type="range" value="12" name="ratio" min="1" max="20" />
+        <input type="range" value="20" name="ratio" min="1" max="20" />
         <span id="ratio-value"></span>
       </div>
       <div>
