@@ -16,20 +16,23 @@ document.getElementById("enabled").addEventListener("change", (event) => {
 
 // ****
 
-const eq = [audioCtx.createBiquadFilter(), audioCtx.createBiquadFilter()];
+const eq = [audioCtx.createBiquadFilter(), audioCtx.createBiquadFilter(), audioCtx.createBiquadFilter(), audioCtx.createBiquadFilter(), audioCtx.createBiquadFilter()];
 
 const connect = () => {
-  source.connect(eq[0]);
-  eq[0].connect(eq[1]);
-  eq[1].connect(audioCtx.destination);
+  source
+    .connect(eq[0])
+    .connect(eq[1])
+    .connect(eq[2])
+    .connect(eq[3])
+    .connect(eq[4])
+    .connect(audioCtx.destination);
 
   document.getElementById("enabled").checked = true;
 };
 
 const disconnect = () => {
   source.disconnect();
-  eq[0].disconnect();
-  eq[1].disconnect();
+  eq.forEach((node) => node.disconnect());
 
   source.connect(audioCtx.destination);
 
@@ -46,13 +49,15 @@ const changeOption = (optionName, value, order) => {
   } else {
     eq[order][optionName].value = value;
   }
-  document.getElementById(`${optionName}-value`).innerHTML = value;
 };
 
 [...document.querySelectorAll(".options-form input, .options-form select")].forEach((input) => {
   const handler = (event) => {
     const order = event.target.parentNode.parentNode.dataset.order;
     changeOption(event.target.name, event.target.value, order);
+    if (event.target.name !== "type") {
+      event.target.parentNode.parentNode.querySelector(`.${event.target.name}-value`).innerHTML = event.target.value;
+    }
   };
   input.addEventListener("input", handler);
   input.addEventListener("change", handler);
@@ -60,4 +65,7 @@ const changeOption = (optionName, value, order) => {
   const order = input.parentNode.parentNode.dataset.order;
   console.log({ key: input.name, value: input.value });
   changeOption(input.name, input.value, order);
+  if (input.name !== "type") {
+    input.parentNode.parentNode.querySelector(`.${input.name}-value`).innerHTML = input.value;
+  }
 });
