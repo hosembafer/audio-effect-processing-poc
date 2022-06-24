@@ -17,10 +17,21 @@ document.getElementById("enabled").addEventListener("change", (event) => {
 // ****
 
 const delayNode = audioCtx.createDelay();
+const feedbackNode = audioCtx.createGain();
+
+const dryNode = audioCtx.createGain();
+const wetNode = audioCtx.createGain();
 
 const connect = () => {
   source.connect(delayNode);
-  delayNode.connect(audioCtx.destination);
+  delayNode.connect(feedbackNode);
+  feedbackNode.connect(delayNode);
+  delayNode.connect(wetNode);
+  wetNode.connect(audioCtx.destination);
+
+  source
+    .connect(dryNode)
+    .connect(audioCtx.destination);
 
   document.getElementById("enabled").checked = true;
 };
@@ -39,7 +50,17 @@ connect();
 // ****
 
 const changeOption = (optionName, value) => {
-  delayNode[optionName].value = value;
+  // delayNode[optionName].value = value;
+  if (optionName === "delayTime") {
+    delayNode.delayTime.value = value / 1000;
+  }
+  if (optionName === "feedback") {
+    feedbackNode.gain.value = value / 100;
+  }
+  if (optionName === "dry_wet") {
+    dryNode.gain.value = 1 - (value / 100);
+    wetNode.gain.value = value / 100;
+  }
   document.getElementById(`${optionName}-value`).innerHTML = value;
 };
 
