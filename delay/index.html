@@ -6,23 +6,24 @@
   <body>
     <!-- <audio controls src="../assets/drum-beat.mp3" id="source"></audio> -->
     <!-- <audio controls src="../assets/drum-beat.mp3" id="source"></audio> -->
-    <audio controls src="../assets/2-speakers-1.53-minutes.wav" id="source" loop></audio>
+    <!-- <audio controls src="../assets/2-speakers-1.53-minutes.wav" id="source" loop></audio> -->
+    <audio controls src="../assets/punch-double-stereo.wav" id="source" loop></audio>
     <div></div>
     <input type="checkbox" id="enabled"> <label for="enabled">On / Off</label>
     <div class="options-form">
       <div>
         <label>Delay Time</label>
-        <input type="range" value="500" name="delayTime" min="0" max="1000" />
+        <input type="range" value="500" name="delayTime" min="0" max="1000" step="10" />
         <span id="delayTime-value"></span>
       </div>
       <div>
         <label>Feedback</label>
-        <input type="range" value="50" name="feedback" min="0" max="100" />
+        <input type="range" value="50" name="feedback" min="0" max="100" step="5" />
         <span id="feedback-value"></span>
       </div>
       <div>
         <label>Dry/Wet</label>
-        <input type="range" value="50" name="dry_wet" min="0" max="100" />
+        <input type="range" value="50" name="dry_wet" min="0" max="100" step="5" />
         <span id="dry_wet-value"></span>
       </div>
     </div>

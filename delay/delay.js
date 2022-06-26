@@ -25,8 +25,9 @@ const wetNode = audioCtx.createGain();
 const connect = () => {
   source.connect(delayNode);
   delayNode.connect(feedbackNode);
-  feedbackNode.connect(delayNode);
-  delayNode.connect(wetNode);
+  feedbackNode.connect(wetNode);
+  wetNode.connect(delayNode);
+  // delayNode.connect(wetNode);
   wetNode.connect(audioCtx.destination);
 
   source
